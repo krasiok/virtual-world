@@ -1,16 +1,20 @@
 package virtual_world.animal;
 
+import java.awt.*;
+
 public enum AnimalType {
 
-    WOLF(9,5),
-    SHEEP(4,4);
+    WOLF(9,5, Color.GRAY),
+    SHEEP(4,4,Color.WHITE);
 
     private final int strength;
     private final int initiative;
+    private final Color color;
 
-    AnimalType(int strength, int initiative){
+    AnimalType(int strength, int initiative, Color color){
         this.strength = strength;
         this.initiative = initiative;
+        this.color = color;
     }
 
     public int getStrength() {
@@ -19,5 +23,9 @@ public enum AnimalType {
 
     public int getInitiative() {
         return initiative;
+    }
+
+    public Color getColor() {
+        return color;
     }
 }

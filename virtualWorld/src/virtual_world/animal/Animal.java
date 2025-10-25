@@ -4,12 +4,26 @@ import virtual_world.Organism;
 import virtual_world.Position;
 import virtual_world.World;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Animal extends Organism {
     protected AnimalType animalType;
+    public static final List<Animal> allAnimals = new ArrayList<>();
 
     public Animal(AnimalType animalType,Position position, World world){
         super(position,world);
         this.animalType = animalType;
+        allAnimals.add(this);
+    }
+
+    public AnimalType getAnimalType() {
+        return animalType;
+    }
+
+    public List<Animal> getAllAnimals() {
+        return allAnimals;
     }
 
     public void action(){
@@ -33,6 +47,11 @@ public abstract class Animal extends Organism {
                 moved = true;
             }
         }
+    }
+
+    @Override
+    public void drawBackground() {
+
     }
 
     @Override

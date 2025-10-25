@@ -1,8 +1,11 @@
 package virtual_world;
 
+import java.awt.*;
+
 public abstract class Organism {
     protected Position position;
     protected World world;
+
 
     public Organism(Position position, World world){
         this.position = position;
@@ -17,7 +20,7 @@ public abstract class Organism {
 
     public abstract void collision();
 
-    public void drawBackground(){
+    public abstract void drawBackground();
 
-    }
+
 }

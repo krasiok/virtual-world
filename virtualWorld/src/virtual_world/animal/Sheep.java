@@ -10,6 +10,9 @@ public class Sheep extends Animal {
         super(AnimalType.SHEEP, position, world);
     }
 
+    public void draw(){
+
+    }
 
 }
 
