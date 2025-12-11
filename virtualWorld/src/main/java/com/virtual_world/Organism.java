@@ -7,13 +7,10 @@ public abstract class Organism {
     protected World world;
     private int age;
 
-
     public Organism(Position position, World world, int age){
         this.position = position;
         this.world = world;
         this.age = age;
-
-
     }
 
     public void setPosition(Position position) {
@@ -25,10 +22,6 @@ public abstract class Organism {
     public abstract void collision(Organism attacker, boolean isCounterAttack);
 
     public abstract void propagation();
-
-
-
-
 
     public Position getPosition() {
         return position;
@@ -45,4 +38,11 @@ public abstract class Organism {
     }
     public abstract boolean hasSpecialDefence();
     public abstract Position getPreviousPosition();
+
+    protected boolean isPositionInWorldBounds(Position position) {
+        return position.getX() >= 0 
+            && position.getX() < world.getRows()
+            && position.getY() >= 0
+            && position.getY() < world.getColumns();
+    }
 }

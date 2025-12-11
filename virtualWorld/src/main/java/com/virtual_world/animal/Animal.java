@@ -32,10 +32,9 @@ public abstract class Animal extends Organism {
         return true;
     }
 
-
     public void action() {
         boolean moved = false;
-        previousPosition = new Position(position.getX(), position.getY());
+        previousPosition = position.clone();
         List<Direction> availableDirections = Direction.getAll();
 
         while (!moved && !availableDirections.isEmpty()) {
@@ -43,7 +42,7 @@ public abstract class Animal extends Organism {
             availableDirections.remove(randomDirection);
             Position newPosition = position.createShifted(randomDirection);
 
-            if (positionValid(newPosition) && canMoveTo(newPosition)) {
+            if (isPositionInWorldBounds(newPosition) && canMoveTo(newPosition)) {
 
                 world.getAllOccupiedPositions().remove(position);
 
@@ -56,12 +55,6 @@ public abstract class Animal extends Organism {
             }
         }
         increaseAge();
-    }
-
-
-    private boolean positionValid(Position position) {
-        return position.getX() >= 0 && position.getX() < world.getRows()
-                && position.getY() >= 0 && position.getY() < world.getColumns();
     }
 
     public boolean defend(){
@@ -109,14 +102,14 @@ public abstract class Animal extends Organism {
 
             Position newPos = position.createShifted(dir);
 
-            if (positionValid(newPos)) {
+            if (isPositionInWorldBounds(newPos)) {
 
                 Animal baby = createChild(newPos);
                 world.addOrganism(baby);
 
-                Organism other = world.getOrganismAtExcluding(newPos,baby);
-                if(other!=null){
-                    baby.collision(other,false);
+                Organism other = world.getOrganismAtExcluding(newPos, baby);
+                if(other != null){
+                    baby.collision(other, false);
                 }
 
                 propagated = true;

@@ -12,27 +12,26 @@ public abstract class Plant extends Organism {
     private Position previousPosition;
 
     public Plant(PlantType plantType, Position position, World world, int age){
-        super(position,world,age);
+        super(position, world, age);
         this.plantType = plantType;
 //        world.addPlant(this);
 //        world.addOrganism(this);
     }
+
     @Override
     public void action(){
         propagation();
     };
-
-
 
     @Override
     public void collision(Organism attacker, boolean isCounterAttack) {
         world.removeOrganism(this, this.position);
     }
 
-
     @Override
     public void propagation() {
         if(!randomUtil.chanceForPropagation(1)) return;
+
         List<Direction> availableDirections = Direction.getAll();
         boolean propagated = false;
 
@@ -42,14 +41,14 @@ public abstract class Plant extends Organism {
 
             Position newPos = position.createShifted(dir);
 
-            if (positionValid(newPos)) {
+            if (isPositionInWorldBounds(newPos)) {
 
                 Plant baby = createChild(newPos);
                 world.addOrganism(baby);
 
-                Organism other = world.getOrganismAtExcluding(newPos,baby);
+                Organism other = world.getOrganismAtExcluding(newPos, baby);
                 if(other != null){
-                    baby.collision(other,false);
+                    baby.collision(other, false);
                 }
 
                 propagated = true;
@@ -58,11 +57,6 @@ public abstract class Plant extends Organism {
     }
 
     public abstract Plant createChild(Position pos);
-
-    private boolean positionValid(Position position) {
-        return position.getX() >= 0 && position.getX() < world.getRows()
-                && position.getY() >= 0 && position.getY() < world.getColumns();
-    }
     public PlantType getPlantType() {
         return plantType;
     }

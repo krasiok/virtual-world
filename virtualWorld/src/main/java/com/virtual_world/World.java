@@ -30,12 +30,12 @@ public class World {
             Organism organism = initiativeQueue.poll();
             if (!isOrganismAlive(organism)) continue;
 
-            Position previousPosition = new Position(organism.getPosition().getX(), organism.getPosition().getY());
+            Position previousPosition = organism.getPosition().clone();
             organism.action();
 
             Organism other = getOrganismAtExcluding(organism.getPosition(), organism);
             if (other != null) {
-                organism.collision(other,false);
+                organism.collision(other, false);
             }
 
             refreshUIAfterMove(previousPosition);
@@ -101,6 +101,7 @@ public class World {
         }
         return null;
     }
+
     public Organism getOrganismAt(Position pos){
         for(Organism organism:allOrganisms){
             if(organism.getPosition().equals(pos)){
@@ -119,6 +120,7 @@ public class World {
     public boolean isOccupied(Position pos) {
         return allOccupiedPositions.contains(pos);
     }
+
     public void updateOrganismPosition(Organism organism, Position oldPos, Position newPos){
         allOccupiedPositions.remove(oldPos);
         allOccupiedPositions.add(newPos);

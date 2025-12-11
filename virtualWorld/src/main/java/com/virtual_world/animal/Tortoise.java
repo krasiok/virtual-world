@@ -14,7 +14,7 @@ public class Tortoise extends Animal {
 
     @Override
     public Animal createChild(Position pos) {
-        return new Tortoise(pos,world);
+        return new Tortoise(pos, world);
     }
 
     @Override
@@ -22,7 +22,9 @@ public class Tortoise extends Animal {
         if(randomUtil.chance(25)) {
             super.action();
         }
-        increaseAge();
+
+        // wiek jest podniesiony w super.action()
+        // increaseAge();
     }
 
     @Override
@@ -36,8 +38,8 @@ public class Tortoise extends Animal {
         super.collision(attacker, isCounterAttack);
     }
 
-    private boolean positionValid(Position position) {
-        return position.getX() >= 0 && position.getX() < world.getRows()
-                && position.getY() >= 0 && position.getY() < world.getColumns();
-    }
+    // private boolean positionValid(Position position) {
+    //     return position.getX() >= 0 && position.getX() < world.getRows()
+    //             && position.getY() >= 0 && position.getY() < world.getColumns();
+    // }
 }

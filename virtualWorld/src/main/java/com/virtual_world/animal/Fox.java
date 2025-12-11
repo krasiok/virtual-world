@@ -22,6 +22,6 @@ public class Fox extends Animal{
 
     @Override
     public Animal createChild(Position pos) {
-        return new Fox(pos,world);
+        return new Fox(pos, world);
     }
 }

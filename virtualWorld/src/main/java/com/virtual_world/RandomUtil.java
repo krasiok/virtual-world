@@ -22,7 +22,6 @@ public class RandomUtil {
 //    int propagationPercentage = 5;
 
     public boolean chanceForPropagation(int chance) {
-
         return random.nextInt(100) <= chance; // in %
     }
 

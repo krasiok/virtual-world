@@ -19,7 +19,7 @@ public class Position {
         return y;
     }
 
-    public void setX(int x){
+    public void setX(int x) {
         this.x = x;
     }
 
@@ -34,15 +34,16 @@ public class Position {
 
     @Override
     public String toString() {
-        return "Position{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+        return String.format("Position { x = %d, y = %d }", x, y);
     }
+
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+
         Position position = (Position) obj;
         return x == position.x && y == position.y;
     }
@@ -52,4 +53,8 @@ public class Position {
         return Objects.hash(x, y);
     }
 
+    @Override
+    public Position clone() {
+        return new Position(x, y);
+    }
 }

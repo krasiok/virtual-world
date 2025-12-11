@@ -6,17 +6,17 @@ import com.virtual_world.World;
 
 import java.awt.*;
 
-public enum PlantType  {
+public enum PlantType {
 
-    GRASS(0,0,Color.GREEN,false),
-    MILKWEED(0,0,Color.YELLOW,false);
+    GRASS(0, 0, Color.GREEN, false),
+    MILKWEED(0, 0, Color.YELLOW, false);
 
     private final int strength;
     private final int initiative;
     private final Color color;
     private final boolean hasSpecialDefence;
 
-    PlantType(int strength, int initiative, Color color, boolean hasSpecialDefence){
+    PlantType(int strength, int initiative, Color color, boolean hasSpecialDefence) {
         this.strength = strength;
         this.initiative = initiative;
         this.color = color;
@@ -39,4 +39,3 @@ public enum PlantType  {
         return hasSpecialDefence;
     }
 }
-

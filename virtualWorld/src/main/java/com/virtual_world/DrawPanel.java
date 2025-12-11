@@ -59,18 +59,16 @@ public class DrawPanel {
             Organism org = creator.apply(pos, world);
             world.addOrganism(org);
         }
-
     }
 
 
     private void drawOrganisms() {
         createOrganism(Wolf::new, 6, world);
         createOrganism(Sheep::new, 5, world);
-        createOrganism(Fox::new,5,world);
-        createOrganism(Tortoise::new,6,world);
+        createOrganism(Fox::new,5, world);
+        createOrganism(Tortoise::new,6, world);
         createOrganism(Grass::new, 6, world);
         createOrganism(Milkweed::new, 4, world);
-
     }
 
     private Position randomPosition() {
@@ -83,6 +81,4 @@ public class DrawPanel {
     public JPanel[][] getCells() {
         return cells;
     }
-
-
 }
