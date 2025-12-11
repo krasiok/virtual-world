@@ -8,17 +8,22 @@ import java.awt.*;
 
 public enum AnimalType {
 
-    WOLF(9,5, Color.GRAY),
-    SHEEP(4,4,Color.WHITE);
+    WOLF(9,5, Color.GRAY,false),
+    SHEEP(4,4,Color.WHITE,false),
+    FOX(3,7,Color.ORANGE,false),
+    TORTOISE(2,1,Color.MAGENTA,true);
+
 
     private final int strength;
     private final int initiative;
     private final Color color;
+    private final boolean hasSpecialDefence;
 
-    AnimalType(int strength, int initiative, Color color){
+    AnimalType(int strength, int initiative, Color color,boolean hasSpecialDefence){
         this.strength = strength;
         this.initiative = initiative;
         this.color = color;
+        this.hasSpecialDefence = hasSpecialDefence;
     }
 
     public int getStrength() {
@@ -33,6 +38,7 @@ public enum AnimalType {
         return color;
     }
 
-
-
+    public boolean hasSpecialDefence() {
+        return hasSpecialDefence;
+    }
 }

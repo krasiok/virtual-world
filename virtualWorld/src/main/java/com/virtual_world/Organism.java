@@ -5,7 +5,6 @@ import java.awt.*;
 public abstract class Organism {
     protected Position position;
     protected World world;
-    protected int strength;
     private int age;
 
 
@@ -13,6 +12,7 @@ public abstract class Organism {
         this.position = position;
         this.world = world;
         this.age = age;
+
 
     }
 
@@ -22,7 +22,9 @@ public abstract class Organism {
 
     public abstract void action();
 
-    public abstract void collision(Organism attacker);
+    public abstract void collision(Organism attacker, boolean isCounterAttack);
+
+    public abstract void propagation();
 
 
 
@@ -36,9 +38,11 @@ public abstract class Organism {
         return age;
     }
     public abstract Color getColor();
-
+    public abstract int getStrength();
     public abstract int getInitiative();
     public void increaseAge(){
         age++;
     }
+    public abstract boolean hasSpecialDefence();
+    public abstract Position getPreviousPosition();
 }

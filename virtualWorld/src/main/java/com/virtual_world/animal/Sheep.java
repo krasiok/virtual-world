@@ -14,34 +14,39 @@ public class Sheep extends Animal {
         this.randomUtil = new RandomUtil();
     }
 
-
     @Override
-    public void propagation() {
-        List<Direction> availableDirections = Direction.getAll();
-        boolean propagated = false;
-
-        while (!propagated || availableDirections.isEmpty()) {
-            Direction dir = randomUtil.getRandomDirection(availableDirections);
-            availableDirections.remove(dir);
-
-            Position newPos = position.createShifted(dir);
-
-            if (positionValid(newPos) && !world.isOccupied(newPos)) {
-
-                Sheep newSheep = new Sheep(newPos, world);
-                world.addOrganism(newSheep);
-                System.out.println("PROPAGATED");
-
-                propagated = true;
-            }
-        }
-
+    public Animal createChild(Position pos) {
+        return new Sheep(pos, world);
     }
 
-    @Override
-    public void collision(Organism attacker) {
-        super.collision(attacker);
-    }
+    //    @Override
+//    public void propagation() {
+//        if(!randomUtil.chanceForPropagation()) return;
+//        List<Direction> availableDirections = Direction.getAll();
+//        boolean propagated = false;
+//
+//        while (!propagated && !availableDirections.isEmpty()) {
+//            Direction dir = randomUtil.getRandomDirection(availableDirections);
+//            availableDirections.remove(dir);
+//
+//            Position newPos = position.createShifted(dir);
+//
+//            if (positionValid(newPos) && !world.isOccupied(newPos)) {
+//
+//                Sheep newSheep = new Sheep(newPos, world);
+//                world.addOrganism(newSheep);
+////                System.out.println("PROPAGATED");
+//
+//                propagated = true;
+//            }
+//        }
+//
+//    }
+
+//    @Override
+//    public void collision(Organism attacker) {
+//        super.collision(attacker);
+//    }
 
     private boolean positionValid(Position position) {
         return position.getX() >= 0 && position.getX() < world.getRows()

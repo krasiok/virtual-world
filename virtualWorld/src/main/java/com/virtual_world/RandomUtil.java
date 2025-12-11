@@ -19,10 +19,14 @@ public class RandomUtil {
         return availableDirections.get(index);
     }
 
-    int plantPropagationPercentage = 5;
+//    int propagationPercentage = 5;
 
-    public boolean plantPropagation() {
+    public boolean chanceForPropagation(int chance) {
 
-        return random.nextInt(100) <= plantPropagationPercentage;
+        return random.nextInt(100) <= chance; // in %
+    }
+
+    public boolean chance(int chanceInPercent){
+        return random.nextInt(100) <= chanceInPercent;
     }
 }

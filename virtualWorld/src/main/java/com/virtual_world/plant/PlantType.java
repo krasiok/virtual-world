@@ -8,16 +8,19 @@ import java.awt.*;
 
 public enum PlantType  {
 
-    GRASS(0,0,Color.GREEN);
+    GRASS(0,0,Color.GREEN,false),
+    MILKWEED(0,0,Color.YELLOW,false);
 
     private final int strength;
     private final int initiative;
     private final Color color;
+    private final boolean hasSpecialDefence;
 
-    PlantType(int strength, int initiative, Color color){
+    PlantType(int strength, int initiative, Color color, boolean hasSpecialDefence){
         this.strength = strength;
         this.initiative = initiative;
         this.color = color;
+        this.hasSpecialDefence = hasSpecialDefence;
     }
 
     public int getStrength() {
@@ -30,6 +33,10 @@ public enum PlantType  {
 
     public int getInitiative() {
         return initiative;
+    }
+
+    public boolean hasSpecialDefence() {
+        return hasSpecialDefence;
     }
 }
 

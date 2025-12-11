@@ -15,13 +15,12 @@ public abstract class Animal extends Organism {
     protected AnimalType animalType;
     private RandomUtil randomUtil = new RandomUtil();
     private int age;
+    Position previousPosition;
 
 
-    public Animal(AnimalType animalType,Position position, World world, int age){
-        super(position,world,age);
+    public Animal(AnimalType animalType, Position position, World world, int age) {
+        super(position, world, age);
         this.animalType = animalType;
-//        world.addAnimal(this);
-        world.addOrganism(this);
         this.age = age;
     }
 
@@ -29,21 +28,30 @@ public abstract class Animal extends Organism {
         return animalType;
     }
 
+    public boolean canMoveTo(Position newPos){
+        return true;
+    }
 
 
-    public abstract void propagation();
-
-
-    public void action(){
+    public void action() {
         boolean moved = false;
+        previousPosition = new Position(position.getX(), position.getY());
         List<Direction> availableDirections = Direction.getAll();
-        while (!moved) {
+
+        while (!moved && !availableDirections.isEmpty()) {
             Direction randomDirection = randomUtil.getRandomDirection(availableDirections);
             availableDirections.remove(randomDirection);
             Position newPosition = position.createShifted(randomDirection);
 
-            if (positionValid(newPosition)) {
+            if (positionValid(newPosition) && canMoveTo(newPosition)) {
+
+                world.getAllOccupiedPositions().remove(position);
+
                 setPosition(newPosition);
+
+
+                world.getAllOccupiedPositions().add(newPosition);
+
                 moved = true;
             }
         }
@@ -51,39 +59,73 @@ public abstract class Animal extends Organism {
     }
 
 
-
     private boolean positionValid(Position position) {
         return position.getX() >= 0 && position.getX() < world.getRows()
                 && position.getY() >= 0 && position.getY() < world.getColumns();
     }
 
+    public boolean defend(){
+        return false;
+    }
+
+    public void collision(Organism other) {
+        collision(other, false);  // Domyślnie nie jest counter-attack
+    }
 
 
-    @Override
-    public void collision(Organism attacker) {
-        if(!(attacker instanceof Animal enemy)){
+    public void collision(Organism other, boolean isCounterAttack) {
+
+        if (this.getClass() == other.getClass()) {
+            world.updateOrganismPosition(this, this.position, previousPosition);
+            propagation();
             return;
         }
-        if (this.getClass() == enemy.getClass()){
-            propagation();
+
+
+        if (!isCounterAttack && other.hasSpecialDefence()) {
+            other.collision(this, true);
+            return;
         }
 
-        int myStrength = this.animalType.getStrength();
-        int enemyStrength = enemy.getAnimalType().getStrength();
+        int myStrength = this.getStrength();
+        int enemyStrength = other.getStrength();
 
-//        System.out.println("COLLISION " + this.animalType +" "+ enemy.animalType);
-
-        if(myStrength>enemyStrength){
-            world.removeOrganism(enemy,enemy.position);
+        if (myStrength > enemyStrength) {
+            world.removeOrganism(other, other.getPosition());
+        } else if (myStrength < enemyStrength) {
+            world.removeOrganism(this, this.position);
         }
-        if(myStrength<enemyStrength){
-            world.removeOrganism(this,this.position);
-        }
-
-        // check if ==
-        // same type -> add new
-
     }
+
+    @Override
+    public void propagation() {
+
+        List<Direction> availableDirections = Direction.getAll();
+        boolean propagated = false;
+
+        while (!propagated && !availableDirections.isEmpty()) {
+            Direction dir = randomUtil.getRandomDirection(availableDirections);
+            availableDirections.remove(dir);
+
+            Position newPos = position.createShifted(dir);
+
+            if (positionValid(newPos)) {
+
+                Animal baby = createChild(newPos);
+                world.addOrganism(baby);
+
+                Organism other = world.getOrganismAtExcluding(newPos,baby);
+                if(other!=null){
+                    baby.collision(other,false);
+                }
+
+                propagated = true;
+            }
+        }
+    }
+
+    public abstract Animal createChild(Position pos);
+
 
     void setRandomUtil(RandomUtil randomUtil) {
         this.randomUtil = randomUtil;
@@ -92,24 +134,35 @@ public abstract class Animal extends Organism {
     public int getAge() {
         return age;
     }
-    public void increaseAge(){
+
+    public void increaseAge() {
         age++;
     }
 
 
-    protected Position getNextPosition() {
 
-        // rand position
-        return null;
-    }
 
     @Override
     public Color getColor() {
-        return animalType.getColor();
+        return getAnimalType().getColor();
     }
 
     @Override
     public int getInitiative() {
         return getAnimalType().getInitiative();
+    }
+
+    @Override
+    public int getStrength() {
+        return getAnimalType().getStrength();
+    }
+
+    @Override
+    public boolean hasSpecialDefence() {
+        return getAnimalType().hasSpecialDefence();
+    }
+
+    public Position getPreviousPosition() {
+        return previousPosition;
     }
 }

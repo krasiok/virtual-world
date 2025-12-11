@@ -11,14 +11,14 @@ public class Main {
             napTime();
             world.takeTurnPseudo();
         }
-        System.out.println(world.getOrganisms().size());
-//        System.out.println(world.getAnimalsNumber());
+        System.out.println(world.getAllOrganisms().size());
+
     }
 
 
     public static void napTime() {
         try {
-            Thread.sleep(20);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

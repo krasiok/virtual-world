@@ -1,8 +1,12 @@
 package com.virtual_world;
 
 
+import com.virtual_world.animal.Fox;
 import com.virtual_world.animal.Sheep;
+import com.virtual_world.animal.Tortoise;
 import com.virtual_world.animal.Wolf;
+import com.virtual_world.plant.Grass;
+import com.virtual_world.plant.Milkweed;
 
 
 import javax.swing.*;
@@ -24,25 +28,6 @@ public class DrawPanel {
         drawOrganisms();
     }
 
-    private Position randomPosition() {
-        int randomX = (int) (Math.random() * world.getRows());
-        int randomY = (int) (Math.random() * world.getColumns());
-
-        return new Position(randomX, randomY);
-    }
-
-    private void createOrganism(BiFunction<Position, World, Organism> creator, int count, World world) {
-        for (int i = 0; i < count; i++) {
-            Position pos = randomPosition();
-            while (world.getAllOccupiedPositions().contains(pos)) {
-                pos = randomPosition();
-            }
-            world.getAllOccupiedPositions().add(pos);
-            Organism org = creator.apply(pos, world);
-            cells[pos.getX()][pos.getY()].setBackground(org.getColor());
-        }
-
-    }
 
     private void drawBoard() {
         JFrame frame = new JFrame();
@@ -64,9 +49,35 @@ public class DrawPanel {
         frame.setVisible(true);
     }
 
+    private void createOrganism(BiFunction<Position, World, Organism> creator, int count, World world) {
+        for (int i = 0; i < count; i++) {
+            Position pos = randomPosition();
+            while (world.getAllOccupiedPositions().contains(pos)) {
+                pos = randomPosition();
+            }
+
+            Organism org = creator.apply(pos, world);
+            world.addOrganism(org);
+        }
+
+    }
+
+
     private void drawOrganisms() {
-        createOrganism(Wolf::new, 4, world);
+        createOrganism(Wolf::new, 6, world);
         createOrganism(Sheep::new, 5, world);
+        createOrganism(Fox::new,5,world);
+        createOrganism(Tortoise::new,6,world);
+        createOrganism(Grass::new, 6, world);
+        createOrganism(Milkweed::new, 4, world);
+
+    }
+
+    private Position randomPosition() {
+        int randomX = (int) (Math.random() * world.getRows());
+        int randomY = (int) (Math.random() * world.getColumns());
+
+        return new Position(randomX, randomY);
     }
 
     public JPanel[][] getCells() {
