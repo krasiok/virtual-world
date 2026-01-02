@@ -8,16 +8,22 @@ import java.util.List;
 
 public class Sheep extends Animal {
     RandomUtil randomUtil;
-
+//    int strength = AnimalType.SHEEP.getStrength();
     public Sheep(Position position, World world) {
         super(AnimalType.SHEEP, position, world, 0);
         this.randomUtil = new RandomUtil();
     }
 
+
+
     @Override
     public Animal createChild(Position pos) {
         return new Sheep(pos, world);
     }
+//    @Override
+//    public void setStrength(int strength) {
+//        this.strength = strength;
+//    }
 
     //    @Override
 //    public void propagation() {

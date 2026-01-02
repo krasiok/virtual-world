@@ -10,10 +10,12 @@ public abstract class Plant extends Organism {
     PlantType plantType;
     private final RandomUtil randomUtil = new RandomUtil();
     private Position previousPosition;
+    private int strength;
 
     public Plant(PlantType plantType, Position position, World world, int age){
         super(position,world,age);
         this.plantType = plantType;
+        this.strength = plantType.getStrength();
 //        world.addPlant(this);
 //        world.addOrganism(this);
     }
@@ -42,15 +44,15 @@ public abstract class Plant extends Organism {
 
             Position newPos = position.createShifted(dir);
 
-            if (positionValid(newPos)) {
+            if (positionValid(newPos) && !world.isOccupied(newPos)) {
 
                 Plant baby = createChild(newPos);
                 world.addOrganism(baby);
 
-                Organism other = world.getOrganismAtExcluding(newPos,baby);
-                if(other != null){
-                    baby.collision(other,false);
-                }
+//                Organism other = world.getOrganismAtExcluding(newPos,baby);
+//                if(other != null){
+//                    baby.collision(other,false);
+//                }
 
                 propagated = true;
             }
@@ -68,6 +70,16 @@ public abstract class Plant extends Organism {
     }
 
     @Override
+    public int getStrength() {
+        return strength;
+    }
+
+    @Override
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    @Override
     public int getInitiative() {
         return getPlantType().getInitiative();
     }
@@ -79,7 +91,7 @@ public abstract class Plant extends Organism {
 
     @Override
     public boolean hasSpecialDefence() {
-        return false;
+        return plantType.hasSpecialDefence();
     }
 
     @Override

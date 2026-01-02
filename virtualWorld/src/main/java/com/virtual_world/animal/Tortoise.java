@@ -6,11 +6,13 @@ import java.util.List;
 
 public class Tortoise extends Animal {
     RandomUtil randomUtil;
-
+//    int strength = AnimalType.TORTOISE.getStrength();
     public Tortoise(Position position, World world) {
         super(AnimalType.TORTOISE, position, world, 0);
         this.randomUtil = new RandomUtil();
     }
+
+
 
     @Override
     public Animal createChild(Position pos) {
@@ -22,14 +24,19 @@ public class Tortoise extends Animal {
         if(randomUtil.chance(25)) {
             super.action();
         }
-        increaseAge();
+
     }
+//    @Override
+//    public void setStrength(int strength) {
+//        this.strength = strength;
+//    }
 
     @Override
     public void collision(Organism attacker, boolean isCounterAttack) {
         if (isCounterAttack && attacker.getStrength() < 5) {
             world.updateOrganismPosition(attacker, attacker.getPosition(),
                     attacker.getPreviousPosition());
+            System.out.println(this.getClass() +" Odstraszył " + attacker.getClass());
             return;
         }
 

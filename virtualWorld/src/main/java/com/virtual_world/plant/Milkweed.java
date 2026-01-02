@@ -7,6 +7,7 @@ import com.virtual_world.World;
 
 public class Milkweed extends Plant {
     RandomUtil randomUtil;
+//    int strength = PlantType.MILKWEED.getStrength();
 
     public Milkweed(Position position, World world) {
         super(PlantType.MILKWEED, position, world, 0);
@@ -26,8 +27,9 @@ public class Milkweed extends Plant {
         return new Milkweed(pos, world);
     }
 
-    @Override
-    public int getStrength() {
-        return PlantType.MILKWEED.getStrength();
-    }
+//    @Override
+//    public void setStrength(int strength) {
+//        this.strength = strength;
+//    }
+
 }

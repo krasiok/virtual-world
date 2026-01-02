@@ -6,11 +6,14 @@ import com.virtual_world.animal.Sheep;
 import com.virtual_world.animal.Tortoise;
 import com.virtual_world.animal.Wolf;
 import com.virtual_world.plant.Grass;
+import com.virtual_world.plant.Guarana;
 import com.virtual_world.plant.Milkweed;
 
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiFunction;
 
 public class DrawPanel {
@@ -23,6 +26,7 @@ public class DrawPanel {
         this.world = world;
     }
 
+
     public void drawWorld() {
         drawBoard();
         drawOrganisms();
@@ -31,7 +35,7 @@ public class DrawPanel {
 
     private void drawBoard() {
         JFrame frame = new JFrame();
-        frame.setSize(1920, 1080);
+        frame.setSize(1024, 768);
 
 
         JPanel panel = new JPanel(new GridLayout(world.getRows(), world.getColumns()));
@@ -64,14 +68,16 @@ public class DrawPanel {
 
 
     private void drawOrganisms() {
-        createOrganism(Wolf::new, 6, world);
-        createOrganism(Sheep::new, 5, world);
-        createOrganism(Fox::new,5,world);
-        createOrganism(Tortoise::new,6,world);
-        createOrganism(Grass::new, 6, world);
-        createOrganism(Milkweed::new, 4, world);
+        createOrganism(Wolf::new, 3, world);
+//        createOrganism(Sheep::new, 4, world);
+//        createOrganism(Fox::new, 4, world);
+//        createOrganism(Tortoise::new, 4, world);
+//        createOrganism(Grass::new, 4, world);
+//        createOrganism(Milkweed::new, 4, world);
+        createOrganism(Guarana::new,8,world);
 
     }
+
 
     private Position randomPosition() {
         int randomX = (int) (Math.random() * world.getRows());

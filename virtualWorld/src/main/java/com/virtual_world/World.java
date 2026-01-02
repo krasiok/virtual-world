@@ -25,22 +25,8 @@ public class World {
 
     public void takeTurnPseudo() {
         sortOrganisms();
+        processOrganismsTurns();
 
-        while (!initiativeQueue.isEmpty()) {
-            Organism organism = initiativeQueue.poll();
-            if (!isOrganismAlive(organism)) continue;
-
-            Position previousPosition = new Position(organism.getPosition().getX(), organism.getPosition().getY());
-            organism.action();
-
-            Organism other = getOrganismAtExcluding(organism.getPosition(), organism);
-            if (other != null) {
-                organism.collision(other,false);
-            }
-
-            refreshUIAfterMove(previousPosition);
-            Main.napTime();
-        }
     }
 
     private void sortOrganisms() {
@@ -51,23 +37,46 @@ public class World {
         initiativeQueue.addAll(allOrganisms);
     }
 
+    private void processOrganismsTurns() {
+        while (!initiativeQueue.isEmpty()) {
+            Organism organism = initiativeQueue.poll();
+            if (!isOrganismAlive(organism)) continue;
+
+            Position previousPosition = new Position(organism.getPosition().getX(), organism.getPosition().getY());
+            organism.action();
+
+            Organism other = getOrganismAtExcluding(organism.getPosition(), organism);
+            if (other != null) {
+                organism.collision(other, false);
+            }
+
+            refreshUIAfterMove(previousPosition);
+        }
+    }
+
+    public void refreshUIAfterMove(Position previousPosition) {
+
+        clearPosition(previousPosition);
+
+        List<Organism> organismsCopy = new ArrayList<>(allOrganisms);
+
+        for (Organism organism : organismsCopy) {
+            Position pos = organism.getPosition();
+            drawPanel.getCells()[pos.getX()][pos.getY()].setBackground(organism.getColor());
+        }
+        Main.napTime();
+
+    }
+
+    public void clearPosition(Position position) {
+        drawPanel.getCells()[position.getX()][position.getY()].setBackground(Color.BLACK);
+    }
+
     private boolean isOrganismAlive(Organism organism) {
         return allOrganisms.contains(organism);
     }
 
-    public void refreshUIAfterMove(Position previousPosition) {
-        SwingUtilities.invokeLater(() -> {
-            clearPosition(previousPosition);
 
-            // Stwórz kopię listy aby uniknąć ConcurrentModificationException
-            List<Organism> organismsCopy = new ArrayList<>(allOrganisms);
-
-            for (Organism organism : organismsCopy) {
-                Position pos = organism.getPosition();
-                drawPanel.getCells()[pos.getX()][pos.getY()].setBackground(organism.getColor());
-            }
-        });
-    }
 
     public int getColumns() {
         return columns;
@@ -101,25 +110,23 @@ public class World {
         }
         return null;
     }
-    public Organism getOrganismAt(Position pos){
-        for(Organism organism:allOrganisms){
-            if(organism.getPosition().equals(pos)){
+
+    public Organism getOrganismAt(Position pos) {
+        for (Organism organism : allOrganisms) {
+            if (organism.getPosition().equals(pos)) {
                 return organism;
             }
         }
         return null;
     }
 
-    public void clearPosition(Position position) {
-        SwingUtilities.invokeLater(() -> {
-            drawPanel.getCells()[position.getX()][position.getY()].setBackground(Color.BLACK);
-        });
-    }
+
 
     public boolean isOccupied(Position pos) {
         return allOccupiedPositions.contains(pos);
     }
-    public void updateOrganismPosition(Organism organism, Position oldPos, Position newPos){
+
+    public void updateOrganismPosition(Organism organism, Position oldPos, Position newPos) {
         allOccupiedPositions.remove(oldPos);
         allOccupiedPositions.add(newPos);
         organism.setPosition(newPos);

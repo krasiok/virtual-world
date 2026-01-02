@@ -7,18 +7,22 @@ public class Main {
         World world = new World();
         world.createWorld();
 
-        for(int i=0; i<50; i++){ // 70 :D
+        for(int i=0; i<25; i++){ // 70 :D
             napTime();
             world.takeTurnPseudo();
         }
         System.out.println(world.getAllOrganisms().size());
+
+        for(Organism org:world.getAllOrganisms()){
+            System.out.println(org.getClass() + " " +org.getStrength());
+        }
 
     }
 
 
     public static void napTime() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(10);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

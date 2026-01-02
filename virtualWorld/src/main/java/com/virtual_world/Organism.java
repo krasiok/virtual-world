@@ -39,6 +39,7 @@ public abstract class Organism {
     }
     public abstract Color getColor();
     public abstract int getStrength();
+    public abstract void setStrength(int strength);
     public abstract int getInitiative();
     public void increaseAge(){
         age++;

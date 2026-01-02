@@ -15,6 +15,7 @@ public abstract class Animal extends Organism {
     protected AnimalType animalType;
     private RandomUtil randomUtil = new RandomUtil();
     private int age;
+    private int strength;
     Position previousPosition;
 
 
@@ -22,6 +23,7 @@ public abstract class Animal extends Organism {
         super(position, world, age);
         this.animalType = animalType;
         this.age = age;
+        this.strength = animalType.getStrength();
     }
 
     public AnimalType getAnimalType() {
@@ -74,16 +76,17 @@ public abstract class Animal extends Organism {
 
 
     public void collision(Organism other, boolean isCounterAttack) {
-
+        System.out.println(">>> collision START");
         if (this.getClass() == other.getClass()) {
             world.updateOrganismPosition(this, this.position, previousPosition);
             propagation();
+            System.out.println(this.getClass() + " Rozmnożenie");
             return;
         }
 
-
         if (!isCounterAttack && other.hasSpecialDefence()) {
             other.collision(this, true);
+            System.out.println(this.getClass()+ " Kolizja z "+other.getClass());
             return;
         }
 
@@ -92,8 +95,10 @@ public abstract class Animal extends Organism {
 
         if (myStrength > enemyStrength) {
             world.removeOrganism(other, other.getPosition());
+            System.out.println(this.getClass() +" Wygrał z " +other.getClass());
         } else if (myStrength < enemyStrength) {
             world.removeOrganism(this, this.position);
+            System.out.println(other.getClass()+" Wygrał z" + this.getClass());
         }
     }
 
@@ -109,15 +114,15 @@ public abstract class Animal extends Organism {
 
             Position newPos = position.createShifted(dir);
 
-            if (positionValid(newPos)) {
+            if (positionValid(newPos) && !world.isOccupied(newPos)) {
 
                 Animal baby = createChild(newPos);
                 world.addOrganism(baby);
 
-                Organism other = world.getOrganismAtExcluding(newPos,baby);
-                if(other!=null){
-                    baby.collision(other,false);
-                }
+//                Organism other = world.getOrganismAtExcluding(newPos,baby);
+//                if(other!=null){
+//                    baby.collision(other,false);
+//                }
 
                 propagated = true;
             }
@@ -154,7 +159,12 @@ public abstract class Animal extends Organism {
 
     @Override
     public int getStrength() {
-        return getAnimalType().getStrength();
+        return strength;
+    }
+
+    @Override
+    public void setStrength(int strength) {
+        this.strength = strength;
     }
 
     @Override
@@ -165,4 +175,6 @@ public abstract class Animal extends Organism {
     public Position getPreviousPosition() {
         return previousPosition;
     }
+
+
 }

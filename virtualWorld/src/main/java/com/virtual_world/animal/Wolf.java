@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Wolf extends Animal {
     RandomUtil randomUtil;
-
+//    int strength = AnimalType.WOLF.getStrength();
     public Wolf(Position position, World world) {
         super(AnimalType.WOLF, position, world, 0);
         this.randomUtil = new RandomUtil();
@@ -19,6 +19,13 @@ public class Wolf extends Animal {
     public Animal createChild(Position pos) {
         return new Wolf(pos,world);
     }
+
+
+//    @Override
+//    public void setStrength(int strength) {
+//        this.strength = strength;
+//    }
+
 
     //    @Override
 //    public void propagation() {
