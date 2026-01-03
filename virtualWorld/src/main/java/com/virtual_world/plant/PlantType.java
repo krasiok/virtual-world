@@ -10,7 +10,8 @@ public enum PlantType  {
 
     GRASS(0,0,Color.GREEN,false),
     MILKWEED(0,0,Color.YELLOW,false),
-    GUARANA(0,0,Color.RED,true);
+    GUARANA(0,0,Color.RED,true),
+    DEADLY_NIGHTSHADE(99,0,Color.BLUE,true);
 
     private final int strength;
     private final int initiative;

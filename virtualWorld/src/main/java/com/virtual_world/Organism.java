@@ -12,8 +12,6 @@ public abstract class Organism {
         this.position = position;
         this.world = world;
         this.age = age;
-
-
     }
 
     public void setPosition(Position position) {

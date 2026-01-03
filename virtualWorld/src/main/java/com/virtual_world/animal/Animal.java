@@ -34,7 +34,7 @@ public abstract class Animal extends Organism {
         return true;
     }
 
-
+    // CHECK IF ANIMALS WITH OVERRIDE ACTION CAN BREAD
     public void action() {
         boolean moved = false;
         previousPosition = new Position(position.getX(), position.getY());
@@ -57,7 +57,7 @@ public abstract class Animal extends Organism {
                 moved = true;
             }
         }
-        increaseAge();
+        increaseAge(); //fix for antelope (it gets 2 times)
     }
 
 
@@ -80,13 +80,13 @@ public abstract class Animal extends Organism {
         if (this.getClass() == other.getClass()) {
             world.updateOrganismPosition(this, this.position, previousPosition);
             propagation();
-            System.out.println(this.getClass() + " Rozmnożenie");
+//            System.out.println(this.getClass() + " Rozmnożenie");
             return;
         }
 
         if (!isCounterAttack && other.hasSpecialDefence()) {
-            other.collision(this, true);
             System.out.println(this.getClass()+ " Kolizja z "+other.getClass());
+            other.collision(this, true);
             return;
         }
 

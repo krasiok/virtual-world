@@ -1,10 +1,8 @@
 package com.virtual_world;
 
 
-import com.virtual_world.animal.Fox;
-import com.virtual_world.animal.Sheep;
-import com.virtual_world.animal.Tortoise;
-import com.virtual_world.animal.Wolf;
+import com.virtual_world.animal.*;
+import com.virtual_world.plant.DeadlyNightshade;
 import com.virtual_world.plant.Grass;
 import com.virtual_world.plant.Guarana;
 import com.virtual_world.plant.Milkweed;
@@ -68,13 +66,15 @@ public class DrawPanel {
 
 
     private void drawOrganisms() {
-        createOrganism(Wolf::new, 3, world);
+        createOrganism(Wolf::new, 5, world);
 //        createOrganism(Sheep::new, 4, world);
 //        createOrganism(Fox::new, 4, world);
 //        createOrganism(Tortoise::new, 4, world);
 //        createOrganism(Grass::new, 4, world);
 //        createOrganism(Milkweed::new, 4, world);
-        createOrganism(Guarana::new,8,world);
+//        createOrganism(Guarana::new,8,world);
+//        createOrganism(DeadlyNightshade::new,5,world);
+          createOrganism(Antelope::new, 5, world);
 
     }
 

@@ -11,7 +11,8 @@ public enum AnimalType {
     WOLF(9,5, Color.GRAY,false),
     SHEEP(4,4,Color.WHITE,false),
     FOX(3,7,Color.ORANGE,false),
-    TORTOISE(2,1,Color.MAGENTA,true);
+    TORTOISE(2,1,Color.MAGENTA,true),
+    ANTELOPE(4,4,Color.cyan,true);
 
 
     private final int strength;
