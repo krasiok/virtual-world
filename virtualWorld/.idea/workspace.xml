@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ff4802b6-1980-4b40-8967-044ffe565153" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="34Qy3YsNBNW6Xq1rLK8dbssN7FB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.AnimalTest.action.executor": "Run",
+    "JUnit.AnimalTest.action_.executor": "Run",
+    "JUnit.AnimalTest.executor": "Run",
+    "Maven.virtualWorld [clean].executor": "Run",
+    "Maven.virtualWorld [compile].executor": "Run",
+    "Maven.virtualWorld [test].executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Kacper/Desktop/virtualWorld",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Kacper\Desktop\virtualWorld\src\main" />
+      <recent name="C:\Users\Kacper\Desktop\virtualWorld\src\virtual_world" />
+      <recent name="C:\Users\Kacper\Desktop\virtualWorld\src" />
+      <recent name="C:\Users\Kacper\Desktop\virtualWorld\src\animal" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.virtual_world.Main" />
+      <module name="virtualWorld" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AnimalTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="virtualWorld" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.virtual_world.animal.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.virtual_world.animal" />
+      <option name="MAIN_CLASS_NAME" value="com.virtual_world.animal.AnimalTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AnimalTest.action" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="virtualWorld" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.virtual_world.animal.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.virtual_world.animal" />
+      <option name="MAIN_CLASS_NAME" value="com.virtual_world.animal.AnimalTest" />
+      <option name="METHOD_NAME" value="action" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AnimalTest.action_" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="virtualWorld" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.virtual_world.animal.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.virtual_world.animal" />
+      <option name="MAIN_CLASS_NAME" value="com.virtual_world.animal.AnimalTest" />
+      <option name="METHOD_NAME" value="action_" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.AnimalTest" />
+      <item itemvalue="JUnit.AnimalTest.action" />
+      <item itemvalue="JUnit.AnimalTest.action_" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.AnimalTest" />
+        <item itemvalue="JUnit.AnimalTest.action" />
+        <item itemvalue="JUnit.AnimalTest.action_" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ff4802b6-1980-4b40-8967-044ffe565153" name="Changes" comment="" />
+      <created>1761159894186</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1761159894186</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/virtualWorld$Main.ic" NAME="Main Coverage Results" MODIFIED="1761161551861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+  </component>
+</project>
