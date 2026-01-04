@@ -1,16 +1,19 @@
 package com.virtual_world;
 
-import javax.swing.*;
+import com.virtual_world.animal.Sheep;
+import com.virtual_world.animal.Wolf;
+
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.function.BiFunction;
 
 public class World {
     private int rows;
     private int columns;
 
     private List<Organism> allOrganisms = new ArrayList<>();
-    private final DrawPanel drawPanel = new DrawPanel(this);
+    private final PanelDrawer panelDrawer = new PanelDrawer(this);
     private final List<Position> allOccupiedPositions = new ArrayList<>();
     private PriorityQueue<Organism> initiativeQueue;
 
@@ -20,13 +23,32 @@ public class World {
         rows = scanner.nextInt();
         columns = scanner.nextInt();
 
-        drawPanel.drawWorld();
+        createInitialOrganisms();
+        panelDrawer.drawWorld();
     }
 
-    public void takeTurnPseudo() {
+    public void takeTurn() {
         sortOrganisms();
         processOrganismsTurns();
+    }
 
+    private void createOrganisms(BiFunction<Position, World, Organism> creator, int count, World world) {
+        for (int i = 0; i < count; i++) {
+            Position pos = randomPosition();
+            while (world.getAllOccupiedPositions().contains(pos)) {
+                pos = randomPosition();
+            }
+
+            Organism org = creator.apply(pos, world);
+            world.addOrganism(org);
+
+        }
+    }
+
+    private void createInitialOrganisms() {
+        createOrganisms(Wolf::new, 1, this);
+//        createOrganisms(Antelope::new, 5, this);
+        createOrganisms(Sheep::new,3,this);
     }
 
     private void sortOrganisms() {
@@ -38,6 +60,7 @@ public class World {
     }
 
     private void processOrganismsTurns() {
+
         while (!initiativeQueue.isEmpty()) {
             Organism organism = initiativeQueue.poll();
             if (!isOrganismAlive(organism)) continue;
@@ -49,27 +72,14 @@ public class World {
             if (other != null) {
                 organism.collision(other, false);
             }
-
-            refreshUIAfterMove(previousPosition);
+            panelDrawer.refreshUIAfterMove(previousPosition);
         }
     }
 
-    public void refreshUIAfterMove(Position previousPosition) {
 
-        clearPosition(previousPosition);
-
-        List<Organism> organismsCopy = new ArrayList<>(allOrganisms);
-
-        for (Organism organism : organismsCopy) {
-            Position pos = organism.getPosition();
-            drawPanel.getCells()[pos.getX()][pos.getY()].setBackground(organism.getColor());
-        }
-        Main.napTime();
-
-    }
 
     public void clearPosition(Position position) {
-        drawPanel.getCells()[position.getX()][position.getY()].setBackground(Color.BLACK);
+        panelDrawer.getCells()[position.getX()][position.getY()].setBackground(Color.BLACK);
     }
 
     private boolean isOrganismAlive(Organism organism) {
@@ -89,17 +99,13 @@ public class World {
     public void addOrganism(Organism organism) {
         allOrganisms.add(organism);
         allOccupiedPositions.add(organism.getPosition());
-
-//        SwingUtilities.invokeLater(() -> {
-//            drawPanel.getCells()[organism.getPosition().getX()][organism.getPosition().getY()]
-//                    .setBackground(organism.getColor());
-//        });
+//        panelDrawer.paintCell(organism);
     }
 
     public void removeOrganism(Organism organism, Position position) {
         allOrganisms.remove(organism);
         allOccupiedPositions.remove(organism.getPosition());
-//        clearPosition(organism.getPosition());
+        clearPosition(organism.getPosition()); // redundant?
     }
 
     public Organism getOrganismAtExcluding(Position pos, Organism exclude) {
@@ -142,5 +148,11 @@ public class World {
 
     public void setOrganisms(List<Organism> organisms) {
         this.allOrganisms = organisms;
+    }
+    private Position randomPosition() {
+        int randomX = (int) (Math.random() * rows);
+        int randomY = (int) (Math.random() * columns);
+
+        return new Position(randomX, randomY);
     }
 }

@@ -9,7 +9,7 @@ public class Main {
 
         for(int i=0; i<25; i++){ // 70 :D
             napTime();
-            world.takeTurnPseudo();
+            world.takeTurn();
         }
         System.out.println(world.getAllOrganisms().size());
 
