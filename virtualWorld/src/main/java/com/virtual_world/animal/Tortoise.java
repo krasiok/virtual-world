@@ -2,21 +2,11 @@ package com.virtual_world.animal;
 
 import com.virtual_world.*;
 
-import java.util.List;
 
 public class Tortoise extends Animal {
-    RandomUtil randomUtil;
-//    int strength = AnimalType.TORTOISE.getStrength();
+
     public Tortoise(Position position, World world) {
         super(AnimalType.TORTOISE, position, world, 0);
-//        this.randomUtil = new RandomUtil();
-    }
-
-
-
-    @Override
-    public Animal createChild(Position pos) {
-        return new Tortoise(pos,world);
     }
 
     @Override
@@ -24,27 +14,20 @@ public class Tortoise extends Animal {
         if(RandomUtil.succeeds(25)) {
             super.action();
         }
-
     }
-//    @Override
-//    public void setStrength(int strength) {
-//        this.strength = strength;
-//    }
 
     @Override
     public void collision(Organism attacker, boolean isCounterAttack) {
         if (isCounterAttack && attacker.getStrength() < 5) {
-            world.updateOrganismPosition(attacker, attacker.getPosition(),
-                    attacker.getPreviousPosition());
-            System.out.println(this.getClass() +" Odstraszył " + attacker.getClass());
+            world.updateOrganismPosition(attacker, attacker.getPosition(), attacker.getPreviousPosition());
             return;
         }
-
         super.collision(attacker, isCounterAttack);
     }
 
-    private boolean positionValid(Position position) {
-        return position.getX() >= 0 && position.getX() < world.getRows()
-                && position.getY() >= 0 && position.getY() < world.getColumns();
+    @Override
+    public Organism createChild(Position pos) {
+        return new Tortoise(pos,world);
     }
+
 }

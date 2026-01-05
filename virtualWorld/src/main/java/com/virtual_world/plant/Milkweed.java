@@ -1,17 +1,14 @@
 package com.virtual_world.plant;
 
+import com.virtual_world.Organism;
 import com.virtual_world.Position;
-import com.virtual_world.RandomUtil;
 import com.virtual_world.World;
 
 
 public class Milkweed extends Plant {
-    RandomUtil randomUtil;
-//    int strength = PlantType.MILKWEED.getStrength();
 
     public Milkweed(Position position, World world) {
         super(PlantType.MILKWEED, position, world, 0);
-        randomUtil = new RandomUtil();
     }
 
     @Override
@@ -23,13 +20,8 @@ public class Milkweed extends Plant {
     }
 
     @Override
-    public Plant createChild(Position pos) {
+    public Organism createChild(Position pos) {
         return new Milkweed(pos, world);
     }
-
-//    @Override
-//    public void setStrength(int strength) {
-//        this.strength = strength;
-//    }
 
 }

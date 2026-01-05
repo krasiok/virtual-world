@@ -1,6 +1,10 @@
 package com.virtual_world;
 
-import com.virtual_world.animal.Sheep;
+import com.virtual_world.animal.*;
+import com.virtual_world.plant.DeadlyNightshade;
+import com.virtual_world.plant.Grass;
+import com.virtual_world.plant.Guarana;
+import com.virtual_world.plant.Milkweed;
 
 import java.util.*;
 import java.util.function.BiFunction;
@@ -55,7 +59,15 @@ public class World {
     // --- 4. METODY PRYWATNE (Szczegóły implementacji logiki) ---
 
     private void createInitialOrganisms() {
-        createOrganisms(Sheep::new, 3, this);
+        createOrganisms(Sheep::new, 2, this);
+        createOrganisms(Wolf::new,2,this);
+        createOrganisms(Tortoise::new,2,this);
+        createOrganisms(Fox::new,2,this);
+        createOrganisms(Antelope::new,2,this);
+        createOrganisms(DeadlyNightshade::new,2,this);
+        createOrganisms(Grass::new,2,this);
+        createOrganisms(Guarana::new,2,this);
+        createOrganisms(Milkweed::new,2,this);
     }
 
     private void createOrganisms(BiFunction<Position, World, Organism> creator, int count, World world) {
@@ -84,6 +96,7 @@ public class World {
 
             Position previousPosition = new Position(organism.getPosition().getX(), organism.getPosition().getY());
             organism.action();
+            organism.increaseAge();
 
             Organism other = getOrganismAtExcluding(organism.getPosition(), organism);
             if (other != null) {
@@ -93,21 +106,22 @@ public class World {
         }
     }
 
-    private boolean isOrganismAlive(Organism organism) {
-        return allOrganisms.contains(organism);
-    }
 
-//    private Position randomPosition() {
-//        int randomX = (int) (Math.random() * rows);
-//        int randomY = (int) (Math.random() * columns);
-//        return new Position(randomX, randomY);
-//    }
 
     // --- 5. ZAPYTANIA (Queries) ---
     // Metody, które nie są prostymi getterami, ale szukają danych
 
     public boolean isOccupied(Position pos) {
         return allOccupiedPositions.contains(pos);
+    }
+
+    private boolean isOrganismAlive(Organism organism) {
+        return allOrganisms.contains(organism);
+    }
+
+    public boolean positionValid(Position position) {
+        return position.getX() >= 0 && position.getX() < rows
+                && position.getY() >= 0 && position.getY() < columns;
     }
 
     public Organism getOrganismAt(Position pos) {
@@ -136,6 +150,10 @@ public class World {
 
     public int getColumns() {
         return columns;
+    }
+
+    public PanelDrawer getPanelDrawer() {
+        return panelDrawer;
     }
 
     public List<Position> getAllOccupiedPositions() {

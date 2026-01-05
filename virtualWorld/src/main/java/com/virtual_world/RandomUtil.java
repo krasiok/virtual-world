@@ -34,6 +34,3 @@ public final class RandomUtil {
     }
 }
 
-//    public Direction getRandomDirection() {
-//        return Direction.of(random.nextInt(4));
-//    }

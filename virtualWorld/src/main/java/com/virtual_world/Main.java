@@ -7,10 +7,13 @@ public class Main {
         World world = new World();
         world.createWorld();
 
-        for(int i=0; i<25; i++){ // 70 :D
+        int numberOfTurns = 25;
+
+        for(int i=0; i<numberOfTurns; i++){
             napTime();
             world.takeTurn();
         }
+
         System.out.println(world.getAllOrganisms().size());
 
         for(Organism org:world.getAllOrganisms()){
@@ -22,7 +25,7 @@ public class Main {
 
     public static void napTime() {
         try {
-            Thread.sleep(1);
+            Thread.sleep(300);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

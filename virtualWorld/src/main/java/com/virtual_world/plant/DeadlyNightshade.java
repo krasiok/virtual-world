@@ -13,11 +13,10 @@ public class DeadlyNightshade extends Plant{
     @Override
     public void collision(Organism attacker, boolean isCounterAttack) {
         world.removeOrganism(attacker,attacker.getPosition());
-        System.out.println("Wilcza jagoda zabiła " + attacker.getClass());
     }
 
     @Override
-    public Plant createChild(Position pos) {
+    public Organism createChild(Position pos) {
         return new DeadlyNightshade(pos,world);
     }
 }
