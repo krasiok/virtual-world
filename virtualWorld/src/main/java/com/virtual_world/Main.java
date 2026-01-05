@@ -22,7 +22,7 @@ public class Main {
 
     public static void napTime() {
         try {
-            Thread.sleep(700);
+            Thread.sleep(1);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

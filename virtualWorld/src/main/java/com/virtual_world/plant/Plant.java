@@ -1,14 +1,14 @@
 package com.virtual_world.plant;
 
 import com.virtual_world.*;
-import com.virtual_world.animal.Wolf;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Random;
 
 public abstract class Plant extends Organism {
     PlantType plantType;
-    private final RandomUtil randomUtil = new RandomUtil();
+//    private final RandomUtil randomUtil = new RandomUtil();
     private Position previousPosition;
     private int strength;
 
@@ -34,17 +34,17 @@ public abstract class Plant extends Organism {
 
     @Override
     public void propagation() {
-        if(!randomUtil.chanceForPropagation(1)) return;
+        if(!RandomUtil.succeeds(1)) return;
         List<Direction> availableDirections = Direction.getAll();
         boolean propagated = false;
 
         while (!propagated && !availableDirections.isEmpty()) {
-            Direction dir = randomUtil.getRandomDirection(availableDirections);
+            Direction dir = RandomUtil.getRandomDirection(availableDirections);
             availableDirections.remove(dir);
 
             Position newPos = position.createShifted(dir);
 
-            if (positionValid(newPos) && !world.isOccupied(newPos)) {
+            if (positionValid(newPos) && world.isOccupied(newPos)) {
 
                 Plant baby = createChild(newPos);
                 world.addOrganism(baby);

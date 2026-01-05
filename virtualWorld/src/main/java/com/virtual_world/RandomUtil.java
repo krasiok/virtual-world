@@ -1,32 +1,39 @@
 package com.virtual_world;
 
+import com.virtual_world.exception.NoDirectionsAvailableException;
+
 import java.util.List;
 import java.util.Random;
 
-public class RandomUtil {
+public final class RandomUtil {
     private static final Random random = new Random();
 
-    public Direction getRandomDirection() {
-        return Direction.of(random.nextInt(4));
+    private RandomUtil() {
+        throw new UnsupportedOperationException("Utility class");
     }
 
-    public Direction getRandomDirection(List<Direction> availableDirections) {
+    public static Direction getRandomDirection(List<Direction> availableDirections) {
 
         if (availableDirections.isEmpty()) {
-            throw new IllegalArgumentException("No available directions"); // TODO wlasny wyjatek
+            throw new NoDirectionsAvailableException("Cannot pick direction: the list of available directions is empty.");
         }
-        int index = (int) (Math.random() * availableDirections.size());
+        int index = random.nextInt(availableDirections.size());
         return availableDirections.get(index);
     }
 
-//    int propagationPercentage = 5;
 
-    public boolean chanceForPropagation(int chance) {
-
-        return random.nextInt(100) <= chance; // in %
+    public static boolean succeeds(int chanceInPercent) {
+        return random.nextInt(100) < chanceInPercent;
     }
 
-    public boolean chance(int chanceInPercent){
-        return random.nextInt(100) <= chanceInPercent;
+    public static Position getRandomPosition(int rows, int columns) {
+        int randomX = random.nextInt(rows);
+        int randomY = random.nextInt(columns);
+
+        return new Position(randomX, randomY);
     }
 }
+
+//    public Direction getRandomDirection() {
+//        return Direction.of(random.nextInt(4));
+//    }

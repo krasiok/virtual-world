@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Antelope extends Animal {
     private final int MOVE_RANGE = 2;
-    RandomUtil randomUtil = new RandomUtil();
+//    RandomUtil randomUtil = new RandomUtil();
     public Antelope(Position position, World world){
         super(AnimalType.ANTELOPE,position,world,0);
     }
@@ -20,17 +20,17 @@ public class Antelope extends Animal {
 
     @Override
     public void collision(Organism attacker, boolean isCounterAttack) {
-        if(isCounterAttack && randomUtil.chance(50)){
+        if(isCounterAttack && RandomUtil.succeeds(50)){
             System.out.println("Antylopa proboje uciekac");
             previousPosition = new Position(position.getX(), position.getY());
             List<Direction> availableDirections = Direction.getAll();
 
             while (!availableDirections.isEmpty()) {
-                Direction randomDirection = randomUtil.getRandomDirection(availableDirections);
+                Direction randomDirection = RandomUtil.getRandomDirection(availableDirections);
                 availableDirections.remove(randomDirection);
                 Position newPosition = position.createShifted(randomDirection);
 
-                if (positionValid(newPosition) && canMoveTo(newPosition) && !world.isOccupied(newPosition)) {
+                if (positionValid(newPosition) && canMoveTo(newPosition) && world.isOccupied(newPosition)) {
 
                     world.getAllOccupiedPositions().remove(position);
                     setPosition(newPosition);

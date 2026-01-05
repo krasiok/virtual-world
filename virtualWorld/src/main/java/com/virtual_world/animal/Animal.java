@@ -1,19 +1,15 @@
 package com.virtual_world.animal;
 
 import com.virtual_world.*;
-import com.virtual_world.plant.Grass;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 //import static com.virtual_world.World.allAnimals;
 
 public abstract class Animal extends Organism {
     protected AnimalType animalType;
-    private RandomUtil randomUtil = new RandomUtil();
+//    private RandomUtil randomUtil = new RandomUtil();
     private int age;
     private int strength;
     Position previousPosition;
@@ -41,7 +37,7 @@ public abstract class Animal extends Organism {
         List<Direction> availableDirections = Direction.getAll();
 
         while (!moved && !availableDirections.isEmpty()) {
-            Direction randomDirection = randomUtil.getRandomDirection(availableDirections);
+            Direction randomDirection = RandomUtil.getRandomDirection(availableDirections);
             availableDirections.remove(randomDirection);
             Position newPosition = position.createShifted(randomDirection);
 
@@ -109,7 +105,7 @@ public abstract class Animal extends Organism {
         boolean propagated = false;
 
         while (!propagated && !availableDirections.isEmpty()) {
-            Direction dir = randomUtil.getRandomDirection(availableDirections);
+            Direction dir = RandomUtil.getRandomDirection(availableDirections);
             availableDirections.remove(dir);
 
             Position newPos = position.createShifted(dir);
@@ -118,6 +114,7 @@ public abstract class Animal extends Organism {
 
                 Animal baby = createChild(newPos);
                 world.addOrganism(baby);
+                //draw baby? because addOrganism can't draw
 
 //                Organism other = world.getOrganismAtExcluding(newPos,baby);
 //                if(other!=null){
@@ -132,9 +129,9 @@ public abstract class Animal extends Organism {
     public abstract Animal createChild(Position pos);
 
 
-    void setRandomUtil(RandomUtil randomUtil) {
-        this.randomUtil = randomUtil;
-    }
+//    void setRandomUtil(RandomUtil randomUtil) {
+//        this.randomUtil = randomUtil;
+//    }
 
     public int getAge() {
         return age;

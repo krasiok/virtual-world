@@ -1,21 +1,23 @@
 package com.virtual_world;
 
 import com.virtual_world.animal.Sheep;
-import com.virtual_world.animal.Wolf;
 
-import java.awt.*;
 import java.util.*;
-import java.util.List;
 import java.util.function.BiFunction;
 
 public class World {
+
+    // --- 1. POLA (Stan obiektu) ---
     private int rows;
     private int columns;
-
     private List<Organism> allOrganisms = new ArrayList<>();
     private final PanelDrawer panelDrawer = new PanelDrawer(this);
     private final List<Position> allOccupiedPositions = new ArrayList<>();
     private PriorityQueue<Organism> initiativeQueue;
+
+    // --- 2. KONSTRUKTORY (Tu brak jawnego, ale to byłoby ich miejsce) ---
+
+    // --- 3. PUBLICZNE METODY BIZNESOWE (Główne funkcjonalności) ---
 
     public void createWorld() {
         Scanner scanner = new Scanner(System.in);
@@ -32,23 +34,39 @@ public class World {
         processOrganismsTurns();
     }
 
-    private void createOrganisms(BiFunction<Position, World, Organism> creator, int count, World world) {
-        for (int i = 0; i < count; i++) {
-            Position pos = randomPosition();
-            while (world.getAllOccupiedPositions().contains(pos)) {
-                pos = randomPosition();
-            }
-
-            Organism org = creator.apply(pos, world);
-            world.addOrganism(org);
-
-        }
+    // Metody operujące na organizmach (publiczne, bo mogą być wołane z zewnątrz)
+    public void addOrganism(Organism organism) {
+        allOrganisms.add(organism);
+        allOccupiedPositions.add(organism.getPosition());
     }
 
+    public void removeOrganism(Organism organism, Position position) {
+        allOrganisms.remove(organism);
+        allOccupiedPositions.remove(organism.getPosition());
+        panelDrawer.clearCell(organism.getPosition());
+    }
+
+    public void updateOrganismPosition(Organism organism, Position oldPos, Position newPos) {
+        allOccupiedPositions.remove(oldPos);
+        allOccupiedPositions.add(newPos);
+        organism.setPosition(newPos);
+    }
+
+    // --- 4. METODY PRYWATNE (Szczegóły implementacji logiki) ---
+
     private void createInitialOrganisms() {
-        createOrganisms(Wolf::new, 1, this);
-//        createOrganisms(Antelope::new, 5, this);
-        createOrganisms(Sheep::new,3,this);
+        createOrganisms(Sheep::new, 3, this);
+    }
+
+    private void createOrganisms(BiFunction<Position, World, Organism> creator, int count, World world) {
+        for (int i = 0; i < count; i++) {
+            Position pos = RandomUtil.getRandomPosition(rows,columns);
+            while (world.getAllOccupiedPositions().contains(pos)) {
+                pos = RandomUtil.getRandomPosition(rows,columns);
+            }
+            Organism org = creator.apply(pos, world);
+            world.addOrganism(org);
+        }
     }
 
     private void sortOrganisms() {
@@ -60,7 +78,6 @@ public class World {
     }
 
     private void processOrganismsTurns() {
-
         while (!initiativeQueue.isEmpty()) {
             Organism organism = initiativeQueue.poll();
             if (!isOrganismAlive(organism)) continue;
@@ -76,45 +93,21 @@ public class World {
         }
     }
 
-
-
-    public void clearPosition(Position position) {
-        panelDrawer.getCells()[position.getX()][position.getY()].setBackground(Color.BLACK);
-    }
-
     private boolean isOrganismAlive(Organism organism) {
         return allOrganisms.contains(organism);
     }
 
+//    private Position randomPosition() {
+//        int randomX = (int) (Math.random() * rows);
+//        int randomY = (int) (Math.random() * columns);
+//        return new Position(randomX, randomY);
+//    }
 
+    // --- 5. ZAPYTANIA (Queries) ---
+    // Metody, które nie są prostymi getterami, ale szukają danych
 
-    public int getColumns() {
-        return columns;
-    }
-
-    public int getRows() {
-        return rows;
-    }
-
-    public void addOrganism(Organism organism) {
-        allOrganisms.add(organism);
-        allOccupiedPositions.add(organism.getPosition());
-//        panelDrawer.paintCell(organism);
-    }
-
-    public void removeOrganism(Organism organism, Position position) {
-        allOrganisms.remove(organism);
-        allOccupiedPositions.remove(organism.getPosition());
-        clearPosition(organism.getPosition()); // redundant?
-    }
-
-    public Organism getOrganismAtExcluding(Position pos, Organism exclude) {
-        for (Organism organism : allOrganisms) {
-            if (organism != exclude && organism.getPosition().equals(pos)) {
-                return organism;
-            }
-        }
-        return null;
+    public boolean isOccupied(Position pos) {
+        return allOccupiedPositions.contains(pos);
     }
 
     public Organism getOrganismAt(Position pos) {
@@ -126,16 +119,23 @@ public class World {
         return null;
     }
 
-
-
-    public boolean isOccupied(Position pos) {
-        return allOccupiedPositions.contains(pos);
+    public Organism getOrganismAtExcluding(Position pos, Organism exclude) {
+        for (Organism organism : allOrganisms) {
+            if (organism != exclude && organism.getPosition().equals(pos)) {
+                return organism;
+            }
+        }
+        return null;
     }
 
-    public void updateOrganismPosition(Organism organism, Position oldPos, Position newPos) {
-        allOccupiedPositions.remove(oldPos);
-        allOccupiedPositions.add(newPos);
-        organism.setPosition(newPos);
+    // --- 6. GETTERY I SETTERY (Boilerplate na samym dole) ---
+
+    public int getRows() {
+        return rows;
+    }
+
+    public int getColumns() {
+        return columns;
     }
 
     public List<Position> getAllOccupiedPositions() {
@@ -148,11 +148,5 @@ public class World {
 
     public void setOrganisms(List<Organism> organisms) {
         this.allOrganisms = organisms;
-    }
-    private Position randomPosition() {
-        int randomX = (int) (Math.random() * rows);
-        int randomY = (int) (Math.random() * columns);
-
-        return new Position(randomX, randomY);
     }
 }

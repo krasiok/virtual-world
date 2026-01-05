@@ -9,7 +9,7 @@ public class Tortoise extends Animal {
 //    int strength = AnimalType.TORTOISE.getStrength();
     public Tortoise(Position position, World world) {
         super(AnimalType.TORTOISE, position, world, 0);
-        this.randomUtil = new RandomUtil();
+//        this.randomUtil = new RandomUtil();
     }
 
 
@@ -21,7 +21,7 @@ public class Tortoise extends Animal {
 
     @Override
     public void action() {
-        if(randomUtil.chance(25)) {
+        if(RandomUtil.succeeds(25)) {
             super.action();
         }
 

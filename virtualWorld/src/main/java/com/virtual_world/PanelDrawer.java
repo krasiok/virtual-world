@@ -57,9 +57,13 @@ public class PanelDrawer {
         cells[posX][posY].setBackground(organism.getColor());
     }
 
+    public void clearCell(Position position) {
+        cells[position.getX()][position.getY()].setBackground(Color.BLACK);
+    }
+
     public void refreshUIAfterMove(Position previousPosition) {
 
-        world.clearPosition(previousPosition);
+        clearCell(previousPosition);
 
         List<Organism> organismsCopy = new ArrayList<>(world.getAllOrganisms());
 
