@@ -1,10 +1,7 @@
 package com.virtual_world;
 
 import com.virtual_world.animal.*;
-import com.virtual_world.plant.DeadlyNightshade;
-import com.virtual_world.plant.Grass;
-import com.virtual_world.plant.Guarana;
-import com.virtual_world.plant.Milkweed;
+import com.virtual_world.plant.*;
 
 import java.util.*;
 import java.util.function.BiFunction;
@@ -38,6 +35,7 @@ public class World {
         processOrganismsTurns();
     }
 
+
     // Metody operujące na organizmach (publiczne, bo mogą być wołane z zewnątrz)
     public void addOrganism(Organism organism) {
         allOrganisms.add(organism);
@@ -59,22 +57,26 @@ public class World {
     // --- 4. METODY PRYWATNE (Szczegóły implementacji logiki) ---
 
     private void createInitialOrganisms() {
-        createOrganisms(Sheep::new, 2, this);
-        createOrganisms(Wolf::new,2,this);
-        createOrganisms(Tortoise::new,2,this);
-        createOrganisms(Fox::new,2,this);
-        createOrganisms(Antelope::new,2,this);
-        createOrganisms(DeadlyNightshade::new,2,this);
-        createOrganisms(Grass::new,2,this);
-        createOrganisms(Guarana::new,2,this);
-        createOrganisms(Milkweed::new,2,this);
+        createOrganisms(Hogweed::new,2,this);
+        createOrganisms(CyberSheep::new,1,this);
+//        createOrganisms(Antelope::new,10,this);
+//        createOrganisms(Sheep::new, 5, this);
+//        createOrganisms(Wolf::new, 5, this);
+
+//        createOrganisms(Tortoise::new, 2, this);
+//        createOrganisms(Fox::new, 2, this);
+//        createOrganisms(Antelope::new, 2, this);
+//        createOrganisms(DeadlyNightshade::new, 2, this);
+//        createOrganisms(Grass::new, 2, this);
+//        createOrganisms(Guarana::new, 2, this);
+//        createOrganisms(Milkweed::new, 2, this);
     }
 
     private void createOrganisms(BiFunction<Position, World, Organism> creator, int count, World world) {
         for (int i = 0; i < count; i++) {
-            Position pos = RandomUtil.getRandomPosition(rows,columns);
+            Position pos = RandomUtil.getRandomPosition(rows, columns);
             while (world.getAllOccupiedPositions().contains(pos)) {
-                pos = RandomUtil.getRandomPosition(rows,columns);
+                pos = RandomUtil.getRandomPosition(rows, columns);
             }
             Organism org = creator.apply(pos, world);
             world.addOrganism(org);
@@ -105,7 +107,6 @@ public class World {
             panelDrawer.refreshUIAfterMove(previousPosition);
         }
     }
-
 
 
     // --- 5. ZAPYTANIA (Queries) ---

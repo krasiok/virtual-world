@@ -9,7 +9,8 @@ public enum AnimalType {
     SHEEP(4, 4, Color.WHITE, false),
     FOX(3, 7, Color.ORANGE, false),
     TORTOISE(2, 1, Color.MAGENTA, true),
-    ANTELOPE(4, 4, Color.cyan, true);
+    ANTELOPE(4, 4, Color.cyan, true),
+    CYBER_SHEEP(11,4,Color.DARK_GRAY,true);
 
 
     private final int strength;
