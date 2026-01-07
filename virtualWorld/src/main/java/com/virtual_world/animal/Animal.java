@@ -100,6 +100,11 @@ public abstract class Animal extends Organism {
     }
 
     @Override
+    public int getExperienceOnKill() {
+        return getAnimalType().getExperienceOnKill();
+    }
+
+    @Override
     public void setStrength(int strength) {
         this.strength = strength;
     }

@@ -74,4 +74,6 @@ public abstract class Organism {
     }
 
     public abstract Color getColor();
+
+    public abstract int getExperienceOnKill();
 }

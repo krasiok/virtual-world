@@ -40,6 +40,11 @@ public abstract class Plant extends Organism {
     }
 
     @Override
+    public int getExperienceOnKill() {
+        return getPlantType().getExperienceOnKill();
+    }
+
+    @Override
     public int getInitiative() {
         return getPlantType().getInitiative();
     }
