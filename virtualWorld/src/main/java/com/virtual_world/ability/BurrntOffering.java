@@ -17,12 +17,15 @@ public class BurrntOffering extends Ability{
 
             Position nearbyPosition = human.getPosition().createShifted(dir);
             Organism nearbyOrganism = world.getOrganismAt(nearbyPosition);
-
-            world.removeOrganism(nearbyOrganism, nearbyPosition);
+            if(nearbyOrganism!=null) {
+                world.removeOrganism(nearbyOrganism, nearbyPosition);
+            }
         }
     }
 
 
+    @Override
+    void cleanup() {
 
-
+    }
 }
