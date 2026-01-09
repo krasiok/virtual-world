@@ -2,11 +2,11 @@ package com.virtual_world.ability;
 
 public enum AbilityType {
 
-    IMMORTALITY(4,10,9,AbilityTrigger.COLLISION),
+    IMMORTALITY(5,10,9,AbilityTrigger.COLLISION),
     MAGIC_ELIXIR(5,10,7,AbilityTrigger.ACTION),
-    ANTELOPE_SPEED(3,10,5,AbilityTrigger.ACTION),
-    ALZUR_SHIELD(2,10,6,AbilityTrigger.COLLISION),
-    BURRNT_OFFERING(3,15,15,AbilityTrigger.ACTION);
+    ANTELOPE_SPEED(5,10,5,AbilityTrigger.ACTION),
+    ALZUR_SHIELD(5,10,6,AbilityTrigger.COLLISION),
+    BURRNT_OFFERING(5,15,15,AbilityTrigger.ACTION);
 
     private final int duration;
     private final int cooldown;

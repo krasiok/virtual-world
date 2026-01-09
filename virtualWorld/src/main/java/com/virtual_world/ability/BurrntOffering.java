@@ -7,18 +7,31 @@ import com.virtual_world.World;
 import com.virtual_world.animal.Human;
 
 public class BurrntOffering extends Ability{
-    public BurrntOffering(World world){
+    private final Human human;
+    public BurrntOffering(World world, Human human){
         super(AbilityType.BURRNT_OFFERING,world);
+        this.human = human;
     }
 
     @Override
-    public void execute(Human human) {
-        for (Direction dir : Direction.getAll()) {
+    public void activate() {
+        super.activate();
+        burnNeighbours();
+    }
 
+    @Override
+    public void execute(Human human, Organism organism) {
+        burnNeighbours();
+    }
+
+    private void burnNeighbours(){
+        for (Direction dir : Direction.getAll()) {
             Position nearbyPosition = human.getPosition().createShifted(dir);
             Organism nearbyOrganism = world.getOrganismAt(nearbyPosition);
             if(nearbyOrganism!=null) {
                 world.removeOrganism(nearbyOrganism, nearbyPosition);
+                human.setXp(human.getXp()+nearbyOrganism.getExperienceOnKill());
+                System.out.println(human.getXp());
             }
         }
     }

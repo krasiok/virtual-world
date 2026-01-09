@@ -39,10 +39,12 @@ public class World {
 
 //        createOrganisms(Hogweed::new, 2, this);
 //        createOrganisms(CyberSheep::new, 1, this);
-        createOrganisms(Sheep::new, 2, this);
-//        createOrganisms(Wolf::new, 2, this);
+//        createOrganisms(Sheep::new, 6, this);
+        createOrganisms(Wolf::new, 8, this);
 //        createOrganisms(Tortoise::new, 3, this);
 //        createOrganisms(Antelope::new, 3, this);
+//        createOrganisms(DeadlyNightshade::new,2,this);
+//        createOrganisms(Hogweed::new,2,this);
         createHuman(); // might be lambda
     }
 
@@ -143,11 +145,9 @@ public class World {
         return null;
     }
 
-    private boolean isOrganismAlive(Organism organism) {
+    public boolean isOrganismAlive(Organism organism) {
         return allOrganisms.contains(organism);
     }
-
-
 
     public boolean positionValid(Position position) {
         return position.getX() >= 0 && position.getX() < rows

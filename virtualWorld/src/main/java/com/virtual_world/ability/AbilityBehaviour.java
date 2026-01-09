@@ -1,5 +1,6 @@
 package com.virtual_world.ability;
 
+import com.virtual_world.Organism;
 import com.virtual_world.Position;
 import com.virtual_world.animal.Human;
 
@@ -10,5 +11,5 @@ public interface AbilityBehaviour {
     int getCost();
     AbilityType getAbilityType();
     AbilityTrigger getAbilityTrigger();
-    void execute(Human human);
+    void execute(Human human, Organism organism);
 }

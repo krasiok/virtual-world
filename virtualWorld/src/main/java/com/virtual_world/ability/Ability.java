@@ -1,5 +1,6 @@
 package com.virtual_world.ability;
 
+import com.virtual_world.Organism;
 import com.virtual_world.World;
 import com.virtual_world.animal.Human;
 
@@ -32,10 +33,8 @@ public abstract class Ability implements AbilityBehaviour {
     }
 
     public void activate() {
-
             durationTimer = abilityType.getDuration();
             isActive = true;
-
     }
 
     public void deactivate() {
@@ -46,6 +45,10 @@ public abstract class Ability implements AbilityBehaviour {
     }
 
     abstract void cleanup();
+
+    public boolean execute(Organism other) {
+        return false;
+    }
 
     public boolean isActive() {
         return isActive;

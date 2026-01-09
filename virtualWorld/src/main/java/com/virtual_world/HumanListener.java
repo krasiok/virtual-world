@@ -41,7 +41,12 @@ public class HumanListener extends KeyAdapter {
         else if (key == VK_3) {
             human.castAbilityByIndex(2); // Wybiera AntelopeSpeed
         }
-
+        else if (key == VK_4) {
+            human.castAbilityByIndex(3); // Wybiera AlzurShield
+        }
+        else if (key == VK_5) {
+            human.castAbilityByIndex(4); // Wybiera Immortality
+        }
 
         }
     }
