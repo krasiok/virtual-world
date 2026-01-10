@@ -64,7 +64,3 @@ The Human can activate powerful skills using keys **`1`** to **`5`**. Abilities 
 | **[4]** | **Alzur's Shield** | Scares away other animals. Any animal trying to step on the Human's tile is pushed to a random adjacent tile. |
 | **[5]** | **Immortality** | The Human cannot be killed. If attacked by a stronger foe, the Human is moved to a safe adjacent tile. |
 
-
-
-```bash
-java -jar game.jar
