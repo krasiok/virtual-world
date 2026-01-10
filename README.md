@@ -64,3 +64,19 @@ The Human can activate powerful skills using keys **`1`** to **`5`**. Abilities 
 | **[4]** | **Alzur's Shield** | Scares away other animals. Any animal trying to step on the Human's tile is pushed to a random adjacent tile. |
 | **[5]** | **Immortality** | The Human cannot be killed. If attacked by a stronger foe, the Human is moved to a safe adjacent tile. |
 
+---
+
+## 🛠️ Installation & Execution
+
+### Prerequisites
+* Java Development Kit (JDK) 8 or higher.
+
+### Running the Game
+1. **Clone the repository** (or download the ZIP file).
+2. Navigate to the following directory inside the project:
+   `virtualWorld/out/artifacts/Virtual World Game/`
+3. This folder contains the executable **`.jar`** file and the required **`resources`** folder side-by-side.
+4. Run the game by executing the following command in your terminal/console from within that folder:
+
+```bash
+java -jar virtualWorld.jar
