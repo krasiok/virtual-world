@@ -64,18 +64,7 @@ The Human can activate powerful skills using keys **`1`** to **`5`**. Abilities 
 | **[4]** | **Alzur's Shield** | Scares away other animals. Any animal trying to step on the Human's tile is pushed to a random adjacent tile. |
 | **[5]** | **Immortality** | The Human cannot be killed. If attacked by a stronger foe, the Human is moved to a safe adjacent tile. |
 
----
 
-## 🛠️ Installation & Execution
-
-### Prerequisites
-* Java Development Kit (JDK) 8 or higher.
-
-### Running the Game
-1. **Clone the repository** (or download the source code).
-2. Navigate to the `out/artifacts/` folder (or where the `.jar` is located).
-3. Ensure the `resources` folder (containing images) is in the correct path relative to the JAR (or embedded).
-4. Run the following command in your terminal:
 
 ```bash
 java -jar game.jar
