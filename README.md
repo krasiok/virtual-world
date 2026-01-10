@@ -42,6 +42,7 @@ All plants have **0 Initiative**. Their standard action is a chance to spread (s
 | 🍒 | **Guarana** | 0 | **Buff:** Adds **+3 Strength** to the animal that eats it. |
 | ☠️ | **Deadly Nightshade**| 99 | **Poison:** Instantly kills any animal that eats it. |
 | ☣️ | **Sosnowsky's Hogweed**| 10 | **Toxic Area:** Kills all animals in its vicinity (neighbors) every turn. Kills any eater (except CyberSheep). |
+| XP | **Lucky Plant** | 0 | **+50 XP** to the animal that eats it. |
 
 ---
 
