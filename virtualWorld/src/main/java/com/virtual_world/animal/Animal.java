@@ -38,7 +38,7 @@ public abstract class Animal extends Organism {
     }
 
     public void collision(Organism other) {
-        collision(other, false);  // Domyślnie nie jest counter-attack
+        collision(other, false);
     }
 
     public void collision(Organism other, boolean isCounterAttack) {
@@ -94,6 +94,8 @@ public abstract class Animal extends Organism {
         return getAnimalType().getInitiative();
     }
 
+
+
     @Override
     public int getStrength() {
         return strength;
@@ -108,6 +110,8 @@ public abstract class Animal extends Organism {
     public void setStrength(int strength) {
         this.strength = strength;
     }
+
+
 
     public Position getPreviousPosition() {
         return previousPosition;

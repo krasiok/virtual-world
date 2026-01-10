@@ -1,6 +1,5 @@
 package com.virtual_world;
 
-import com.virtual_world.animal.Animal;
 
 import java.awt.*;
 import java.util.List;

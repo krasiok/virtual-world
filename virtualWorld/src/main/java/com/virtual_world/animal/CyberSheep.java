@@ -29,7 +29,7 @@ public class CyberSheep extends Animal {
             world.updateOrganismPosition(this, this.position, nextMove);
         } else {
             if (!isTurnedIntoSheep) {
-                this.animalType = AnimalType.SHEEP;
+                turnIntoSheep();
                 isTurnedIntoSheep = true;
             }
             super.action();
@@ -41,7 +41,9 @@ public class CyberSheep extends Animal {
 
         if (other instanceof Hogweed) {
             world.removeOrganism(other, other.getPosition());
+            return;
         }
+            super.collision(other, isCounterAttack);
     }
 
 
@@ -90,6 +92,11 @@ public class CyberSheep extends Animal {
             if (currentY > targetY) return position.createShifted(Direction.UP);
             else return position.createShifted(Direction.DOWN);
         }
+    }
+
+    public void turnIntoSheep(){
+        this.setStrength(AnimalType.SHEEP.getStrength());
+        this.animalType = AnimalType.SHEEP;
     }
 
     @Override

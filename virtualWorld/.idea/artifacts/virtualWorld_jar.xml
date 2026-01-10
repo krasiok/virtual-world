@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="virtualWorld:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/virtualWorld_jar</output-path>
+    <root id="archive" name="virtualWorld.jar">
+      <element id="module-output" name="virtualWorld" />
+    </root>
+  </artifact>
+</component>

@@ -1,7 +1,6 @@
 package com.virtual_world;
 
 import com.virtual_world.animal.Human;
-import com.virtual_world.Organism;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -20,7 +19,6 @@ public class HumanListener extends KeyAdapter {
     public void keyPressed(KeyEvent e) {
 
         int key = e.getKeyCode();
-        boolean turnFinished = false;
 
         if(key == VK_KP_LEFT || key == VK_A){
             human.setNextMoveDirection(Direction.UP);
@@ -33,19 +31,19 @@ public class HumanListener extends KeyAdapter {
         }
 
         if (key == VK_1) {
-            human.castAbilityByIndex(0); // Wybiera BurntOffering
+            human.castAbilityByIndex(0); //BurntOffering
         }
         else if (key == VK_2) {
-            human.castAbilityByIndex(1); // Wybiera MagicElixir
+            human.castAbilityByIndex(1); //MagicElixir
         }
         else if (key == VK_3) {
-            human.castAbilityByIndex(2); // Wybiera AntelopeSpeed
+            human.castAbilityByIndex(2); //AntelopeSpeed
         }
         else if (key == VK_4) {
-            human.castAbilityByIndex(3); // Wybiera AlzurShield
+            human.castAbilityByIndex(3); //AlzurShield
         }
         else if (key == VK_5) {
-            human.castAbilityByIndex(4); // Wybiera Immortality
+            human.castAbilityByIndex(4); //Immortality
         }
 
         }

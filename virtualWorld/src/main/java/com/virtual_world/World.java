@@ -3,26 +3,46 @@ package com.virtual_world;
 import com.virtual_world.animal.*;
 import com.virtual_world.plant.*;
 
+import javax.swing.*;
 import java.util.*;
 import java.util.function.BiFunction;
 
 public class World {
 
-    // --- POLA ---
     private int rows;
     private int columns;
-    private List<Organism> allOrganisms = new ArrayList<>();
+    private final List<Organism> allOrganisms = new ArrayList<>();
     private final PanelDrawer panelDrawer = new PanelDrawer(this);
     private final List<Position> allOccupiedPositions = new ArrayList<>();
     private PriorityQueue<Organism> initiativeQueue;
 
-    // --- METODY GŁÓWNE ---
 
     public void createWorld() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Podaj rozmiar swiata: wiersze -> kolumny");
-        rows = scanner.nextInt();
-        columns = scanner.nextInt();
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Enter the size of the world rows -> columns");
+//        rows = scanner.nextInt();
+//        columns = scanner.nextInt();
+
+        try {
+            String rowsInput = JOptionPane.showInputDialog("Enter the width of the world");
+            if (rowsInput != null && !rowsInput.isEmpty()) {
+                rows = Integer.parseInt(rowsInput);
+            } else {
+                rows = 20;
+            }
+
+            String colsInput = JOptionPane.showInputDialog("Enter the height of the world");
+            if (colsInput != null && !colsInput.isEmpty()) {
+                columns = Integer.parseInt(colsInput);
+            } else {
+                columns = 20;
+            }
+        } catch (NumberFormatException e) {
+
+            System.out.println("Invalid data, set default 20x20");
+            rows = 20;
+            columns = 20;
+        }
 
         createInitialOrganisms();
         panelDrawer.drawWorld();
@@ -33,19 +53,25 @@ public class World {
         processOrganismsTurns();
     }
 
-    // --- IMPLEMENTACJA LOGIKI ---
 
     private void createInitialOrganisms() {
 
-//        createOrganisms(Hogweed::new, 2, this);
-//        createOrganisms(CyberSheep::new, 1, this);
-//        createOrganisms(Sheep::new, 6, this);
-        createOrganisms(Wolf::new, 8, this);
-//        createOrganisms(Tortoise::new, 3, this);
-//        createOrganisms(Antelope::new, 3, this);
-//        createOrganisms(DeadlyNightshade::new,2,this);
-//        createOrganisms(Hogweed::new,2,this);
-        createHuman(); // might be lambda
+
+        createOrganisms(Sheep::new, 3, this);
+        createOrganisms(Wolf::new, 2, this);
+        createOrganisms(Fox::new, 3, this);
+        createOrganisms(Tortoise::new, 3, this);
+        createOrganisms(Antelope::new, 3, this);
+        createOrganisms(CyberSheep::new, 2, this);
+
+        createOrganisms(Grass::new, 3, this);
+        createOrganisms(Milkweed::new, 3, this);
+        createOrganisms(Guarana::new, 2, this);
+        createOrganisms(DeadlyNightshade::new, 2, this);
+        createOrganisms(Hogweed::new, 2, this);
+        createOrganisms(LuckyPlant::new, 2, this);
+
+        createHuman();
     }
 
     private void createHuman() {
@@ -101,7 +127,6 @@ public class World {
         }
     }
 
-    // --- ZARZĄDZANIE POZYCJAMI ---
 
     public void updateOrganismPosition(Organism organism, Position oldPos, Position newPos) {
         allOccupiedPositions.remove(oldPos);
@@ -120,7 +145,6 @@ public class World {
         panelDrawer.clearCell(position);
     }
 
-    // --- GETTERY / POMOCNICZE ---
 
     public boolean isOccupied(Position pos) {
         return allOccupiedPositions.contains(pos);
@@ -134,7 +158,6 @@ public class World {
         }
         return null;
     }
-
 
     public Organism getOrganismAtExcluding(Position pos, Organism exclude) {
         for (Organism organism : allOrganisms) {

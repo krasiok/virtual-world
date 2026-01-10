@@ -19,6 +19,7 @@ public class DeadlyNightshade extends Plant{
             }
         }
         world.removeOrganism(attacker,attacker.getPosition());
+        world.removeOrganism(this,this.getPosition());
     }
 
     @Override

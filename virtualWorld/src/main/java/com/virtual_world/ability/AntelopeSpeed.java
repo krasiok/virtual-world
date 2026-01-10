@@ -21,7 +21,6 @@ public class AntelopeSpeed extends Ability {
         super.activate();
 
         human.setMoveLength(MOVE_LENGTH);
-        System.out.println("AntelopeSpeed: od razu ustawiony na 2.");
     }
 
 

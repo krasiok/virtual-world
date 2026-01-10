@@ -5,12 +5,12 @@ import java.awt.*;
 
 public enum AnimalType {
 
-    WOLF(9, 5, Color.GRAY, false,4),
-    SHEEP(4, 4, Color.WHITE, false,1),
-    FOX(3, 7, Color.ORANGE, false,2),
-    TORTOISE(2, 1, Color.MAGENTA, true,5),
-    ANTELOPE(4, 4, Color.cyan, true,3),
-    CYBER_SHEEP(11,4,Color.DARK_GRAY,true,10),
+    WOLF(9, 5, Color.GRAY, false,8),
+    SHEEP(4, 4, Color.WHITE, false,4),
+    FOX(3, 7, Color.ORANGE, false,6),
+    TORTOISE(2, 1, Color.MAGENTA, true,7),
+    ANTELOPE(4, 4, Color.cyan, true,7),
+    CYBER_SHEEP(11,4,Color.DARK_GRAY,true,15),
     HUMAN(5,4,Color.yellow,true,0);
 
 

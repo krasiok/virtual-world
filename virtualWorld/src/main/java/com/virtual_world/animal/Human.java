@@ -36,26 +36,22 @@ public class Human extends Animal {
         if(!world.isOrganismAlive(this)){
             return;
         }
-        System.out.println("Próba użycia umiejętności nr: " + (index + 1));
 
         if (index < 0 || index >= abilities.size()) {
-            System.out.println("-> Nie ma takiej umiejętności!");
             return;
         }
 
         Ability candidate = abilities.get(index);
 
 
-        if (candidate.getCooldown() == 0 && !candidate.isActive()) { // tutaj warunki z expem dam itd.
+        if (candidate.getCooldown() == 0 && !candidate.isActive() && candidate.getCost() <= this.xp) {
+            setXp(xp-candidate.getCost());
             if(this.activeAbility!=null){
                 this.activeAbility.deactivate();
             }
             this.activeAbility = candidate;
             this.activeAbility.activate();
 
-            System.out.println("-> SUKCES! Aktywowano: " + activeAbility.getClass().getSimpleName());
-        } else {
-            System.out.println("-> BŁĄD: Cooldown (" + candidate.getCooldown() + ") lub już aktywna.");
         }
     }
 
@@ -66,10 +62,7 @@ public class Human extends Animal {
         if (activeAbility != null && activeAbility.getAbilityTrigger() == AbilityTrigger.ACTION && activeAbility.isActive()) {
             activeAbility.execute(this,null);
         }
-        if(activeAbility!= null) {
-            System.out.println(activeAbility.getClass());
-        }
-        System.out.println("TURA CZŁOWIEKA");
+
         while (nextMoveDirection == null) {
             try {
                 Thread.sleep(100);
@@ -95,7 +88,7 @@ public class Human extends Animal {
 
     @Override
     public void collision(Organism other, boolean isCounterAttack) {
-        System.out.println("collision");
+
         if(isCounterAttack && activeAbility != null && activeAbility.getAbilityTrigger() == AbilityTrigger.COLLISION && activeAbility.isActive()){
             activeAbility.execute(this,other);
             return;
@@ -118,10 +111,6 @@ public class Human extends Animal {
         this.nextMoveDirection = nextMoveDirection;
     }
 
-    public Direction getNextMoveDirection() {
-        return nextMoveDirection;
-    }
-
     public boolean isImmortal() {
         return isImmortal;
     }
@@ -138,10 +127,6 @@ public class Human extends Animal {
         this.xp = xp;
     }
 
-    public int getMoveLength() {
-        return moveLength;
-    }
-
     public void setMoveLength(int moveLength) {
         this.moveLength = moveLength;
     }
@@ -152,6 +137,10 @@ public class Human extends Animal {
 
     public void setBasicStrength(int basicStrength) {
         this.basicStrength = basicStrength;
+    }
+
+    public List<Ability> getAbilities() {
+        return abilities;
     }
 
     @Override
