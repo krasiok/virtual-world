@@ -59,7 +59,7 @@ The Human can activate powerful skills using keys **`1`** to **`5`**. Abilities 
 
 | Key | Ability Name | Description |
 |:---:|:---|:---|
-| **[1]** | **Burnt Offering** | Destroys (incinerates) all plants and animals on the tiles immediately surrounding the Human. |
+| **[1]** | **Burnt Offering** | Destroys all plants and animals on the tiles immediately surrounding the Human. |
 | **[2]** | **Magic Elixir** | Increases Strength to **10**. Strength decreases by 1 each subsequent turn until it returns to normal. |
 | **[3]** | **Antelope Speed** | Movement range increases to **2 tiles**. <br>(First 3 turns: 100% chance; Last 2 turns: 50% chance). |
 | **[4]** | **Alzur's Shield** | Scares away other animals. Any animal trying to step on the Human's tile is pushed to a random adjacent tile. |
